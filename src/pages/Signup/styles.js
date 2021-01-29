@@ -1,22 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  loginView: {
-    padding: 30,
-    paddingTop: 5
-  },
-  signinTxt: {
-    color: '#2e3192',
-    fontSize: 40
-  },
-  loginHeader: {
-    backgroundColor: '#ffffff',
-    marginTop: 0,
-    width: '100%'
-  },
   backIcon: {
     color: '#2e3192',
     fontSize: 30
+  },
+  signupView: {
+    padding: 30,
+    paddingTop: 5
+  },
+  signupTxt: {
+    color: '#2e3192',
+    fontSize: 40
   },
   inputBlock: {
     marginTop: 70
@@ -41,32 +36,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  loginBtn: {
+  createAcc: {
     height: 55,
     marginLeft: 20,
     marginRight: 20,
     backgroundColor: '#2e3192'
   },
-  loginTxt: {
+  createTxt: {
     fontSize: 18
   },
-  orText: {
-    fontSize: 18,
-    marginTop: 30,
-    marginBottom: 30
-  },
-  loginFb: {
-    backgroundColor: '#ffffff',
-    height: 55,
-    marginLeft: 20,
-    marginRight: 20,
-    borderColor: '#2e3192',
-    borderWidth: 2
-  },
-  loginFbTxt: {
-    fontSize: 18,
-    color: '#2e3192'
-  }
 });
 
 export default styles;

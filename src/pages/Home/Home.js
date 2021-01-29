@@ -19,6 +19,7 @@ const Home = ({navigation}) => {
       <Button style={styles.signUpBtn}
       rounded
       block
+      onPress={() => navigation.navigate('Signup')}
       >
         <Text style={styles.signUpTxt}>Sign Up</Text>
       </Button>
