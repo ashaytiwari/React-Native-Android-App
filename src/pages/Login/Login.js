@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StatusBar} from 'react-native';
 import styles from './styles';
 import {
@@ -14,9 +14,77 @@ import {
   Input,
   Button,
   Icon,
+  Toast,
+  Root,
 } from 'native-base';
 
-const Login = ({ navigation }) => {
+const Login = ({navigation, route}) => {
+  const [emailMobile, setEmailMobile] = useState('');
+  const [pass, setPass] = useState('');
+  const userData = [
+    {
+      firstName: 'Abc',
+      lastName: 'Def',
+      email: 'abc@gmail.com',
+      phoneNo: '1122334455',
+      pass: '12345',
+    },
+    {
+      firstName: 'Test1',
+      lastName: 'Test1',
+      email: 'Test1@gmail.com',
+      phoneNo: '1122334455',
+      pass: '12345',
+    },
+  ];
+
+  /**
+   * function to push new user data into existing data coming from sign up page
+   */
+  if (typeof route.params !== 'undefined') {
+    const newUserRegistration = () => {
+      userData.push({
+        firstName: route.params.first,
+        lastName: route.params.last,
+        email: route.params.email,
+        phoneNo: route.params.phone,
+        pass: route.params.password,
+      });
+      console.log(userData);
+    };
+    newUserRegistration();
+  }
+
+  /**
+   * function for login implementation
+   */
+  const login = () => {
+    let count = 0;
+    for (let user = 0; user < userData.length; user++) {
+      if (
+        (emailMobile === userData[user].email ||
+          emailMobile === userData[user].phoneNo) &&
+        pass === userData[user].pass
+      ) {
+        count = 0;
+        break;
+      } else {
+        count++;
+      }
+    }
+    if (!count) {
+      navigation.navigate('Dashboard');
+    } else {
+      return Toast.show({
+        text: 'Wrong Email or Password',
+        buttonText: 'Ok',
+        position: 'bottom',
+        type: 'danger',
+        duration: 4000,
+      });
+    }
+  };
+
   return (
     <Container>
       <StatusBar barStyle={'dark-content'} backgroundColor="#ffffff" />
@@ -29,8 +97,7 @@ const Login = ({ navigation }) => {
         <Body />
         <Right />
       </Header> */}
-      <Button transparent 
-      onPress={() => navigation.navigate('Home')}>
+      <Button transparent onPress={() => navigation.navigate('Home')}>
         <Icon name="chevron-back" style={styles.backIcon} type="Ionicons" />
       </Button>
 
@@ -38,27 +105,30 @@ const Login = ({ navigation }) => {
         <Text style={styles.signinTxt}>Sign In</Text>
         <Content style={styles.inputBlock}>
           <Item style={styles.item}>
-            <Input style={styles.input} placeholder="Email or Phone Number" />
+            <Input
+              style={styles.input}
+              placeholder="Email or Phone Number"
+              value={emailMobile}
+              onChange={(e) => setEmailMobile(e.nativeEvent.text)}
+            />
           </Item>
           <Item style={styles.item}>
-            <Input secureTextEntry={true} style={styles.input} placeholder="Password"/>
+            <Input
+              secureTextEntry={true}
+              style={styles.input}
+              placeholder="Password"
+              value={pass}
+              onChange={(e) => setPass(e.nativeEvent.text)}
+            />
           </Item>
         </Content>
 
         <Content contentContainerStyle={styles.btnBlock}>
-          <Button 
-          style={styles.loginBtn}
-          rounded
-          block
-          >
+          <Button style={styles.loginBtn} rounded block onPress={() => login()}>
             <Text style={styles.loginTxt}>Log In</Text>
           </Button>
           <Text style={styles.orText}>OR</Text>
-          <Button 
-          style={styles.loginFb}
-          rounded
-          block
-          >
+          <Button style={styles.loginFb} rounded block>
             <Text style={styles.loginFbTxt}>Login with Facebook</Text>
           </Button>
         </Content>
