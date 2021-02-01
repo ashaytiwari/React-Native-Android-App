@@ -25,8 +25,8 @@ const Search = () => {
    */
   const fetchCities = () => {
     console.log(city);
-    fetch(`https://jsonplaceholder.typicode.com/posts`)
-    .then((response) => response.json())
+    axios.get(`https://jsonplaceholder.typicode.com/posts`)
+    // .then((response) => response.json())
     .then((res) => {
       console.log(res, 'res');
     })

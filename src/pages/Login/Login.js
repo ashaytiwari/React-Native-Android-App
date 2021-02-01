@@ -60,6 +60,7 @@ const Login = ({navigation, route}) => {
    */
   const login = () => {
     let count = 0;
+    let userIndex = 0;
     for (let user = 0; user < userData.length; user++) {
       if (
         (emailMobile === userData[user].email ||
@@ -67,13 +68,17 @@ const Login = ({navigation, route}) => {
         pass === userData[user].pass
       ) {
         count = 0;
+        userIndex = user;
+        console.log('user index', userIndex);
         break;
       } else {
         count++;
       }
     }
     if (!count) {
-      navigation.navigate('Dashboard');
+      navigation.navigate('Dashboard', {
+        userData: userData[userIndex]
+      });
     } else {
       return Toast.show({
         text: 'Wrong Email or Password',
