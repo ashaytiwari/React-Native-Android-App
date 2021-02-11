@@ -20,6 +20,17 @@ const Signup = ({navigation}) => {
   const [pass, setPass] = useState('');
 
   /**
+   * function to reset form
+   */
+  const resetForm = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPass('');
+    setPhoneNo('');
+  };
+
+  /**
    * function to create the account
    */
   const createAccount = () => {
@@ -30,6 +41,7 @@ const Signup = ({navigation}) => {
       type: 'success',
       duration: 4000,
     });
+    resetForm();
     navigation.navigate('Login', {
       first: firstName,
       last: lastName,
@@ -37,6 +49,14 @@ const Signup = ({navigation}) => {
       phone: phoneNo,
       password: pass,
     });
+  };
+
+  /**
+   * function to disable the signup button
+   */
+  const disableBtn = () => {
+    if (!firstName || !lastName || !phoneNo || !email || !pass) return true;
+    else return false;
   };
 
   return (
@@ -99,7 +119,8 @@ const Signup = ({navigation}) => {
             style={styles.createAcc}
             rounded
             block
-            onPress={() => createAccount()}>
+            onPress={() => createAccount()}
+            disabled={disableBtn()}>
             <Text style={styles.createTxt}>Create Account</Text>
           </Button>
         </Content>

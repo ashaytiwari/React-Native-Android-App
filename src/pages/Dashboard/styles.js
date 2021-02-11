@@ -62,6 +62,15 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#ffffff'
+  },
+  footer: {
+    backgroundColor: '#2e3192'
+  },
+  footerIcon: {
+    color: '#ffffff',
+  },
+  footerText: {
+    color: '#ffffff'
   }
 });
 

@@ -98,7 +98,7 @@ const UserInfo = ({ navigation, route }) =>  {
               </Grid>
               <Grid>
                 <Col size={1}>
-                  <Text style={styles.label}>cat-phrase</Text>
+                  <Text style={styles.label}>Catch phrase</Text>
                 </Col>
                 <Col size={3}>
                   <Text style={styles.value}>{route.params.userInfo.company.catchPhrase}</Text>

@@ -76,6 +76,7 @@ const Login = ({navigation, route}) => {
       }
     }
     if (!count) {
+      resetForm();
       navigation.navigate('Dashboard', {
         userData: userData[userIndex]
       });
@@ -89,6 +90,28 @@ const Login = ({navigation, route}) => {
       });
     }
   };
+
+  /**
+   * function to resset the form
+   */
+  const resetForm = () => {
+    setEmailMobile("");
+    setPass("");
+  } 
+
+  /**
+   * function to disabled the login button
+   */
+  const disabledBtn = () => {
+    if(!emailMobile || !pass){
+      console.log('empty values');
+      return true;
+    } 
+    else{
+      console.log('have values');
+      return false;
+    }
+  }
 
   return (
     <Container>
@@ -129,7 +152,7 @@ const Login = ({navigation, route}) => {
         </Content>
 
         <Content contentContainerStyle={styles.btnBlock}>
-          <Button style={styles.loginBtn} rounded block onPress={() => login()}>
+          <Button style={styles.loginBtn} rounded block onPress={() => login()} disabled={disabledBtn()}>
             <Text style={styles.loginTxt}>Log In</Text>
           </Button>
           <Text style={styles.orText}>OR</Text>
